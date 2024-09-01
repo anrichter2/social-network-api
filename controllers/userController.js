@@ -4,8 +4,9 @@ module.exports = {
     async getUsers(req, res) {
         try {
             const users = await User.find()
-                .populate('thoughts friends');
-                
+                .select('-__v')
+                // .populate('thoughts friends');
+
             res.status(200).json(users);
         } catch (err) {
             res.status(500).json(err);
@@ -14,7 +15,9 @@ module.exports = {
     async getSingleUser(req, res) {
         try {
             const user = await User.findOne({ _id: req.params.userId })
-                .populate('thoughts friends');
+            .select('-__v')
+            .populate('thoughts friends');
+
             res.status(200).json(user);
         } catch (err) {
             res.status(500).json(err);
@@ -80,7 +83,7 @@ module.exports = {
         try {
             const user = await User.findOneAndUpdate(
                 { _id: req.params.userId },
-                { $pull: {friends: req.body }},
+                { $pull: {friends: req.params.friendId }},
                 { runValidators: true, new: true },
             );
 
@@ -92,5 +95,5 @@ module.exports = {
         } catch (err) {
             res.status(500).json(err);
         }
-    }
-}
+    },
+};
