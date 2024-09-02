@@ -1,5 +1,6 @@
 const { Schema, Types } = require('mongoose');
 
+// Created a new instance of a mongoose schema to define the shape of reactions
 const reactionSchema = new Schema(
     {
         reactionId: {
@@ -18,6 +19,7 @@ const reactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now(),
+            // Added a getter so whenever a get request for a thought document and its' reactions occurs it will format the date to be more readable for the user
             get: (date) => date.toDateString(),
         }
     },
@@ -29,4 +31,5 @@ const reactionSchema = new Schema(
     },
 );
 
+// Export to thoughts model
 module.exports = reactionSchema;
