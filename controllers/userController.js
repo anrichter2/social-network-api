@@ -50,7 +50,16 @@ module.exports = {
     },
     async deleteUser(req, res) {
         try {
+            // findOne user and delete thoughts first before delete
             const user = await User.findOneAndDelete({ _id: req.params.userId });
+            console.log(user)
+
+            if (user.thoughts.length) {
+                for (let i = user.thoughts.length; i > 0; i--) {
+                    const thoughts = await Thought.findOneAndDelete({ _id: user.thoughts[i - 1] })
+                    console.log(thoughts);
+                }
+            };
 
             if (!user) {
                 res.status(404).json({ message: 'No user by that id' });

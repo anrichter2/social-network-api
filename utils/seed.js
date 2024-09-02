@@ -1,5 +1,6 @@
 const connection = require('../config/connection');
 const { User, Thought } = require('../models');
+const { userDataOne, userDataTwo, thoughtData } = require('./data')
 
 connection.on('error', (err) => err);
 
@@ -16,22 +17,17 @@ connection.once('open', async () => {
         await connection.dropCollection('thoughts');
     };
 
-    const thought = {
-        thoughtText: "Here's a cool thought",
-        username: "lernantino",
-    };
+    const userOne = await User.create(userDataOne);
 
-    const thoughtData = await Thought.create(thought);
-
-    await User.create(
-        {
-            username: "lernantino",
-            email: "lernantino@gmail.com",
-            thoughts: [...thoughtData.map(({_id}) => _id)],
-        }
+    const thoughtOne = await Thought.create(thoughtData);
+    const updateUserOne = await User.findOneAndUpdate(
+        { username: userOne.username },
+        { $addToSet: { thoughts: thoughtOne._id }},
+        { runValidators: true, new: true },
     );
 
-    console.table(thought);
+    const userTwo = await User.create(userDataTwo);
+
     console.info('Seeding complete! 🌱');
-    process.exit(0)
+    process.exit(0);
 })
