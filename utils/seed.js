@@ -1,6 +1,6 @@
 const connection = require('../config/connection');
 const { User, Thought } = require('../models');
-const { userDataOne, userDataTwo, thoughtData } = require('./data')
+const { userDataOne, userDataTwo, thoughtDataOne, thoughtDataTwo } = require('./data')
 
 connection.on('error', (err) => err);
 
@@ -26,7 +26,7 @@ connection.once('open', async () => {
     const userOne = await User.create(userDataOne);
 
     // Seed the database with a new thought tied to previous user
-    const thoughtOne = await Thought.create(thoughtData);
+    const thoughtOne = await Thought.create(thoughtDataOne);
     const updateUserOne = await User.findOneAndUpdate(
         { username: userOne.username },
         { $addToSet: { thoughts: thoughtOne._id }},
@@ -35,6 +35,13 @@ connection.once('open', async () => {
 
     //Create a second user with no thoughts yet
     const userTwo = await User.create(userDataTwo);
+
+    const thoughtTwo = await Thought.create(thoughtDataTwo);
+    const updateUserTwo = await User.findOneAndUpdate(
+        { username: userTwo.username },
+        { $addToSet: { thoughts: thoughtTwo._id }},
+        { runValidators: true, new: true },
+    );
 
     console.info('Seeding complete! 🌱');
     process.exit(0);

@@ -8,9 +8,14 @@ const userDataTwo = {
     email: "aarichte@gmail.com"
 };
 
-const thoughtData = {
+const thoughtDataOne = {
     thoughtText: "Here's a cool thought",
     username: "lernantino",
 };
 
-module.exports = { userDataOne, userDataTwo, thoughtData }
+const thoughtDataTwo = {
+    thoughtText: "My thoughts are cooler",
+    username: "aarichte",
+};
+
+module.exports = { userDataOne, userDataTwo, thoughtDataOne, thoughtDataTwo }

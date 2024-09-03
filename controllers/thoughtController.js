@@ -77,6 +77,12 @@ module.exports = {
                 res.status(404).json({ message: 'No thought found with that id' });
             };
 
+            const user = await User.findOneAndUpdate(
+                { thoughts: req.params.thoughtId },
+                { $pull: { thoughts: req.params.thoughtId }},
+                { runValidators: true, new: true }
+            );
+
             res.status(200).json(thought);
         } catch (err) {
             res.status(500).json(err);
