@@ -6,7 +6,7 @@ The goal of this project was to create the back end API of a social media site. 
 
 ## Installation
 
-You will need to open the terminal and run npm install to load in all necessary dependencies. Then run the command npm run seed to create and seed the database with a couple users and a thought. Once that is done the application should be ready to run.
+You will need to open the terminal and run npm install to load in all necessary dependencies. Then run the command npm run seed to create and seed the database with a couple users and thoughts. Once that is done the application should be ready to run.
 
 ## Usage
 
@@ -43,7 +43,7 @@ Below are screenshots showing insomnia requests being answered.
 ![Application Delete reaction](./images/delete-reaction.png)
 
 Link to a walkthrough video showing the application in action:
-[Walkthrough Video]()
+[Walkthrough Video](https://drive.google.com/file/d/1txb9hPaEOwv93OdsLNfpLqIsbVgGz4np/view?usp=sharing)
 
 ## Credits
 

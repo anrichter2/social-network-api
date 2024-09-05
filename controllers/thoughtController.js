@@ -18,7 +18,7 @@ module.exports = {
 
             //If thought doesn't exist with that id return with message
             if (!thought) {
-                res.status(404).json({ message: 'No thought found with that id '});
+                return res.status(404).json({ message: 'No thought found with that id '});
             };
 
             res.status(200).json(thought);
@@ -41,7 +41,7 @@ module.exports = {
             );
 
             if (!user) {
-                res.status(404).json({ message: 'No user found with that id'});
+                return res.status(404).json({ message: 'No user found with that id'});
             };
 
             res.status(200).json(thought);
@@ -60,7 +60,7 @@ module.exports = {
             );
 
             if (!thought) {
-                res.status(404).json({ message: 'No thought found with that id' });
+                return res.status(404).json({ message: 'No thought found with that id' });
             };
 
             res.status(200).json(thought);
@@ -74,7 +74,7 @@ module.exports = {
             const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId });
 
             if (!thought) {
-                res.status(404).json({ message: 'No thought found with that id' });
+                return res.status(404).json({ message: 'No thought found with that id' });
             };
 
             const user = await User.findOneAndUpdate(
@@ -82,6 +82,10 @@ module.exports = {
                 { $pull: { thoughts: req.params.thoughtId }},
                 { runValidators: true, new: true }
             );
+
+            if (!user) {
+                return res.status(404).json({ message: 'No user found with that id' })
+            };
 
             res.status(200).json(thought);
         } catch (err) {
@@ -100,7 +104,7 @@ module.exports = {
             );
 
             if (!thought) {
-                res.status(404).json({ message: 'No thought found with that id' });
+                return res.status(404).json({ message: 'No thought found with that id' });
             };
 
             res.status(200).json(thought);
@@ -120,7 +124,7 @@ module.exports = {
             );
 
             if (!thought) {
-                res.status(404).json({ message: 'No thought found with that id' });
+                return res.status(404).json({ message: 'No thought found with that id' });
             };
 
             res.status(200).json(thought);

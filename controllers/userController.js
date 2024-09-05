@@ -48,7 +48,7 @@ module.exports = {
 
             // If no user with this id then return message
             if (!user) {
-                res.status(404).json({ message: 'No user with that id' });
+                return res.status(404).json({ message: 'No user with that id' });
             };
 
             res.status(200).json(user);
@@ -71,7 +71,7 @@ module.exports = {
             };
 
             if (!user) {
-                res.status(404).json({ message: 'No user by that id' });
+                return res.status(404).json({ message: 'No user by that id' });
             };
 
             res.status(200).json(user);
@@ -91,7 +91,7 @@ module.exports = {
             );
 
             if (!user) {
-                res.status(404).json({ message: 'No user with that id' })
+                return res.status(404).json({ message: 'No user with that id' })
             };
 
             res.status(200).json(user);
@@ -110,7 +110,7 @@ module.exports = {
             );
 
             if (!user) {
-                res.status(404).json({ message: 'No user with that id' });
+                return res.status(404).json({ message: 'No user with that id' });
             };
 
             res.status(200).json(user);
